@@ -19,6 +19,10 @@ cd vice-3.3/data/C64
 sudo cp chargen kernal basic /usr/lib/vice/C64
 cd vice-3.3/data/DRIVES
 sudo cp d1541II d1571cr dos* /usr/lib/vice/DRIVES/
+
+cd vice-3.3/data/C128
+sudo cp chargen* kernal* basic* /usr/lib/vice/C128
+
 ```
 
 ### C
@@ -36,6 +40,15 @@ First `sudo apt install default-jre` and then download [Kick Assembler](http://w
 
 ```
 java -jar kickass.jar <binary>.asm
+```
+
+### Debugger
+https://github.com/sunsided/c64-debugger
+
+```
+sudo apt-get install gcc g++ libgtk-3-dev libasound2-dev mesa-common-dev libxcb-util* 
+cd MTEngine/
+make
 ```
 
 

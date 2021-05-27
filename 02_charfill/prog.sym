@@ -1,0 +1,6 @@
+.label scrloop=$2033
+.label introtxt=$2049
+.label charloop=$2020
+.label quit=$2045
+.label start=$2000
+.label introloop=$2014

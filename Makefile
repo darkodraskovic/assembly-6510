@@ -2,7 +2,7 @@ all:
 	java -jar ~/Programs/KickAss/KickAss.jar prog.asm
 
 run:
-	x64 prog.prg
+	vice-jz.x64 -silent -autostartprgmode 1 prog.prg
 
 clean:
 	rm *.prg *.sym
