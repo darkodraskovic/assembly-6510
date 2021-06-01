@@ -1,0 +1,2 @@
+tiles.tiles.gif
+Z:\home\darko\Development\assembly-6510\art\tiles.char_hires_8x8.layer-Layer 1.map001.txm

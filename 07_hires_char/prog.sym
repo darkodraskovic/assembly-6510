@@ -1,0 +1,3 @@
+.label char_print_loop=$1038
+.label char_init_loop=$1009
+.label start=$1000

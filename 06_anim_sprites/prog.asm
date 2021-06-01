@@ -33,9 +33,9 @@ start:
         lda     #120
         sta     SPRITE_0_Y
 
-        lda     #%00000000              // only sprite 1 is multicolor
+        lda     #%00000000              // no multicolor sprites
         sta     SPRITE_HIRES
-        lda     #%00000001              // turn on sprite 0 and 1
+        lda     #%00000001              // turn on sprite 0
         sta     SPRITE_ENABLE
         // sta     SPRITE_DOUBLE_X      // scale x2 horizontally
         // sta     SPRITE_DOUBLE_Y
@@ -56,7 +56,7 @@ game_loop:
         
 key_loop:
         jsr     CHR_IN
-        cmp     #$103
+        cmp     #$103           // run stop
         beq     quit
 
         // check key presses

@@ -24,9 +24,9 @@
         // Write: Raster line to generate interrupt at
         lda     RASTER_LINE_MSB
         and     #MSB
-        sta     RASTER_LINE_MSB                 // set bit 7 (rater line pos MSB) to 0
+        sta     RASTER_LINE_MSB                 // set bit 8 (rater line pos MSB)
         lda     #LSB
-        sta     RASTER_LINE                     // set low byte to $00
+        sta     RASTER_LINE                     // set low byte (bits 0-7) to LSB
 }
 
 .macro  SET_INTERRUPT_EXECUTION(irq) {
@@ -70,4 +70,14 @@
         sta     SPRITE_MULTICOLOR_1     // multicolor 1 of sprites (bit combo 01)
         lda     #multiCol2
         sta     SPRITE_MULTICOLOR_2     // multicolor 2 of sprites (bit combo 11)
+}
+
+.macro LOAD_HIRES_CHAR(fileName, numCharsX, numCharsY) {
+        .var pic = LoadPicture(fileName)
+        .for (var y = 0; y < numCharsY; y++)
+                .for (var x = 0; x < numCharsX; x++) {
+                        .var offset = y*8
+                        .for (var i = offset; i < offset+8; i++)
+                                .byte pic.getSinglecolorByte(x,i)
+                }
 }

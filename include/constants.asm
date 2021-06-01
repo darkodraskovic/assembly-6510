@@ -18,7 +18,7 @@
 // Timer A/B underflow, TOD is equal to alarm time, byte received/sent from/to serial shift register, signal level on FLAG pin, interrupt generated
 .var INTERRUPT_STA_CTRL = $DC0D                         // R occurence, W enable/disable with Bit #7: Fill bit
 .var RASTER_SPRITE_INT_STA = $D019                      // status (R occurence, W acknowledge) of raster interrupt, sprite-background and sprite-sprite collisions
-.var RASTER_SPRITE_INT_CTRL = $D01A                     // R enable / W disable raster interrupt, sprite-background and sprite-sprite collisions
+.var RASTER_SPRITE_INT_CTRL = $D01A                     // R is enabled/disabled; W enable/disable raster interrupt, sprite-background and sprite-sprite collisions
 
 .var JPORT2 = $DC00
 
