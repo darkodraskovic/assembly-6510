@@ -1,9 +1,0 @@
-.label irqinit=$1000
-.label ack=$1088
-.label start=$1026
-.label irq1=$102c {
-}
-.label irq3=$106c {
-}
-.label irq2=$1050 {
-}
