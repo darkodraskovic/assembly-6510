@@ -1,1 +1,0 @@
-/home/darko/Development/assembly6510/Makefile
