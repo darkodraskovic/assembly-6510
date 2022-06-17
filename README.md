@@ -13,22 +13,21 @@ sudo apt-get install vice
 Install the kernal and other files needed to run C64 emulator:
 
 ```
-wget http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/vice-3.3.tar.gz
-tar -zxvf vice-3.3.tar.gz
-cd vice-3.3/data/C64
+wget https://sourceforge.net/projects/vice-emu/files/releases/vice-3.6.1.tar.gz/download
+tar -zxvf vice-3.6.1.tar.gz
 
 # on RPi only
-sudo mkdir ~/.local/share/vice/C64
-sudo mkdir ~/.local/share/vice/DRIVES
-sudo mkdir ~/.local/share/vice/C128
+sudo mkdir ~/.local/share/vice/C64/
+sudo mkdir ~/.local/share/vice/DRIVES/
+sudo mkdir ~/.local/share/vice/C128/
 
 # on RPi replace /usr/lib/vice with ~/.local/share/vice
-sudo cp chargen kernal basic /usr/lib/vice/C64
-cd vice-3.3/data/DRIVES
-sudo cp d1541II d1571cr dos* /usr/lib/vice/DRIVES/
-
-cd vice-3.3/data/C128
-sudo cp chargen* kernal* basic* /usr/lib/vice/C128
+cd vice-3.6.1/data/C64
+sudo cp chargen kernal basic /usr/share/vice/C64/
+cd vice-3.6.1/data/DRIVES
+sudo cp d1541II d1571cr dos* /usr/share/vice/DRIVES/
+cd vice-3.6.1/data/C128
+sudo cp chargen* kernal* basic* /usr/share/vice/C128/
 
 ```
 
@@ -36,16 +35,25 @@ sudo cp chargen* kernal* basic* /usr/lib/vice/C128
 
 
 ```
-sudo apt-get install libsdl2-dev libsdl2-2.0-0 libsdl2-image-dev libsdl2-image-2.0-0 libsdl2-ttf-2.0-0 libsdl2-ttf-dev
+sudo apt-get install libsdl2-dev libsdl2-2.0-0 libsdl2-image-dev libsdl2-image-2.0-0 libsdl2-ttf-2.0-0 libsdl2-ttf-dev libpcap-dev
 sudo apt-get install flex byacc dos2unix xa65 texinfo texlive-binaries libglew2.1 libglew-dev
 ```
 
 Go to https://vice-emu.sourceforge.io/ and download `vice-3.6.1.tar.gz`. Unpack it and `cd` to `vice-3.6.1` and
 
 ```
-./configure --prefix=/home/pi/viceinstall --enable-sdlui2 --without-oss --enable-ethernet --disable-catweasel --without-pulse
+#   --with-oss              use the OSS sound system
+#   --without-pulse         do not use PulseAudio sound system
+#   --disable-catweasel     disables CatWeasel (PCI/Zorro/Clockport SID card) support
+#   --enable-ethernet       enables The Final Ethernet emulation
+# ./configure --prefix=/home/darko/Programs/VICE --enable-sdlui2 --without-oss --enable-ethernet --disable-catweasel --without-pulse
+./configure --prefix=/home/darko/Programs/VICE
 make -j $(nproc)
 ```
+
+#### Configuration
+
+VICE configuration can be found in `/home/darko/.config/vice`.
 
 ### C
 

@@ -1,5 +1,5 @@
 KICKASS_JAR="/home/darko/Programs/KickAssembler/KickAss.jar"
-EMU_EXE="x64"
+EMU_EXE="x64sc"
 
 PROJ_DIR=~/Development/assembly-6510/
 PROG_DIR=01_assembly
@@ -10,7 +10,12 @@ if [ "$OSTYPE" = "msys" ]; then
     KICKASS_JAR="c:/Users/darko/Programs/KickAssembler/KickAss.jar"
     EMU_EXE="c:/Users/darko/Programs/VICE/bin/x64sc.exe"
 
-    PROJ_DIR=c:/Users/darko/Development/assembly-6510/    
+    PROJ_DIR=c:/Users/darko/Development/assembly-6510/
+else
+    arch=$(dpkg --print-architecture)
+    if [ $arch == "arm64" ]; then
+        EMU_EXE="/home/darko/Programs/VICE/bin/x64sc"
+    fi
 fi
 
 while getopts "d:p:s" option; do
