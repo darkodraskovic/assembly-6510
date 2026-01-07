@@ -1,5 +1,5 @@
-        .import source "../include/constants.asm"
-        .import source "../include/utils.asm"
+        .import source "../import/constants.asm"
+        .import source "../import/utils.asm"
 
         .const  spraddr         =       200
         .const  spr0Fname =       "anim_hires_plane"

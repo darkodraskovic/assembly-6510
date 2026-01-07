@@ -1,5 +1,7 @@
 #importonce
 
+.import source "constants.asm"
+        
 .macro  SAVE_REG_TO_STACK() {
         // save A, X, Y to stack
         pha                                     // A -> stack

@@ -1,5 +1,5 @@
-        .import source "../include/constants.asm"
-        .import source "../include/utils.asm"
+        .import source "../import/constants.asm"
+        .import source "../import/utils.asm"
         
         BasicUpstart2(start)
 
@@ -32,11 +32,11 @@ char_init_loop:
         sta     TEXT_COLOR
         jsr     CLR_SCR
 
-        lda     GRAPHICS_POINTER 
+        lda     VIC_MEM_PTR 
         and     #240
         clc
         adc     #12
-        sta     GRAPHICS_POINTER        // Bits #1-#3 %110, 6: $3000-$37FF^ 
+        sta     VIC_MEM_PTR        // Bits #1-#3 %110, 6: $3000-$37FF^ 
 
         ldx     #40
 char_print_loop:

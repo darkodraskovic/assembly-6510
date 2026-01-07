@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "*.asm": "kickassembler"
+  },
+
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [80],
+
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true
+}

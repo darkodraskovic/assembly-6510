@@ -30,6 +30,7 @@
 .const TXT_COLOUR_1 = $D022
 .const TXT_COLOUR_2 = $D023
 .const  VIC_CONTR_REG = $D016
+.const COLOR_RAM = $D800 // 1/2 kB (1000 nibbles) of color memory
 //sprite colors registers
 .const	SPRITE_MULTICOLOR_1 = $D025
 .const	SPRITE_MULTICOLOR_2 = $D026
@@ -41,11 +42,21 @@
 .const	SPRITE_MULTICOLOR_3_5 = $D02C
 .const	SPRITE_MULTICOLOR_3_6 = $D02D
 .const	SPRITE_MULTICOLOR_3_7 = $D02E
+
 //sprite enable
 .const	SPRITE_ENABLE = $D015
-//address holding pointer info to graphics area
-.const	GRAPHICS_POINTER = $D018
-//sprite pointers - relative to GRAPHICS_POINTER
+
+// active VIC bank selector
+// bits are active-low (inverted logic) // $0000–$3FFF, $4000–$7FFF, $8000–$BFFF, $C000–$FFFF
+// Only bits 0 and 1 matter for VIC bank selection // VIC can only see 16 KB at a time
+.const VIC_BANK = $DD00
+
+// selects inside the currently active VIC bank
+// Upper nibble (bits 7–4): Screen memory // VIC bank base + (value × 1024)
+// Lower nibble (bits 3–1): Character memory // VIC bank base + (value × 2048)
+.const	VIC_MEM_PTR = $D018
+
+//sprite pointers - relative to VIC_MEM_PTR
 //sprite data address / 64
 .const	SPRITE_POINTER_0 = $07F8
 .const	SPRITE_POINTER_1 = $07F9

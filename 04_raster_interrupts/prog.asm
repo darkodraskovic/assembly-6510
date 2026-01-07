@@ -1,5 +1,5 @@
-        .import source "../include/constants.asm"
-        .import source "../include/utils.asm"
+        .import source "../import/constants.asm"
+        .import source "../import/utils.asm"
 
         .var    music   =       LoadSid("Saboteur.sid")
 

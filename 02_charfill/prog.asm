@@ -1,4 +1,4 @@
-        .import source "../include/constants.asm"
+        .import source "../import/constants.asm"
 
         .var    runstop =       $0103
 
