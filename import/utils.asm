@@ -20,32 +20,36 @@
         pla
 }
 
-// Write: Raster line to generate interrupt at
-// MSB = #$ff (1) or #7f (0), LSB = #$00, #$ff
-.macro  SET_RASTER_LINE_INTERRUPT(MSB, LSB) {                
-        // Write: Raster line to generate interrupt at
-        lda     RASTER_LINE_MSB
-        and     #MSB
-        sta     RASTER_LINE_MSB                 // set bit 8 (rater line pos MSB)
-        lda     #LSB
-        sta     RASTER_LINE                     // set low byte (bits 0-7) to LSB
+.macro SET_RASTER_IRQ_LINE(line) {
+        .assert "line must be 0–311", line, line >= 0 && line <= 311
+
+        lda RASTER_LINE_MSB          // read $D011 (VIC control + raster MSB)
+        and #%01111111               // clear raster bit 8
+        .if (line >= 256)
+            ora #%10000000           // set raster bit 8 if line >= 256
+        sta RASTER_LINE_MSB          // write back, preserve other control bits
+
+        lda #(line & $FF)            // low 8 bits of raster line
+        sta RASTER_LINE              // $D012: raster compare value
 }
 
-.macro  SET_INTERRUPT_EXECUTION(irq) {
-        lda     #<irq
-        sta     INTERRUPT_EXECUTION_LOW
-        lda     #>irq
-        sta     INTERRUPT_EXECUTION_HIGH
+.macro SET_IRQ_VECTOR(irq) {
+        lda #<irq                    // IRQ handler address (low byte)
+        sta INTERRUPT_EXECUTION_LOW  // $0314
+        lda #>irq                    // IRQ handler address (high byte)
+        sta INTERRUPT_EXECUTION_HIGH // $0315
 }
+
 
 // fileName : str        
 .macro  LOAD_HIRES_SPRITE(fileName) {
         .var pic = LoadPicture(fileName)
-        .for (var y=0; y<21; y++)
-                .for (var x=0;x<3; x++)
+
+        .for (var y=0; y<21; y++) // which row
+                .for (var x=0;x<3; x++) // which byte of the row
                         .byte pic.getSinglecolorByte(x,y)
 
-        .fill 1,0
+        .fill 1,0 // Sprites are 64 bytes long, but only 63 are used: add one byte of padding
 }
         
 
@@ -57,12 +61,13 @@
 // fileName : str; -Col : hex        
 .macro  LOAD_MULTICOL_SPRITE(fileName, indvidualCol, multiCol1, multiCol2) {
         // List().add(transparent, SPRITE_MULTICOLOR_1, SPRITE_MULTICOLOR_3_X, SPRITE_MULTICOLOR_2)
+        // Multicolor 1 ($D025), Sprite individual color ($D027+n), Multicolor 2 ($D026)
        .var pic = LoadPicture(fileName, List().add($00,multiCol1,indvidualCol,multiCol2))
        .for (var y=0; y<21; y++)
                .for (var x=0;x<3; x++)
                        .byte pic.getMulticolorByte(x,y)
         .fill 1,0
-}        
+}
 
 ///  spriteMulticolor : SPRITE_MULTICOLOR_3_x (x = 0,7)
 .macro  SET_SPRITE_COLORS(spriteMulticolor, indvidualCol, multiCol1, multiCol2){

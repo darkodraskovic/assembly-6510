@@ -16,9 +16,9 @@ irqinit:
         ora     #$01                            // Bit #0: 1 = Raster interrupt enabled.
         sta     RASTER_SPRITE_INT_CTRL
 
-        SET_RASTER_LINE_INTERRUPT($7f,$00)
+        SET_RASTER_IRQ_LINE(0)
 
-        SET_INTERRUPT_EXECUTION(irq1)
+        SET_IRQ_VECTOR(irq1)
 
         cli
 
@@ -42,7 +42,7 @@ irq1:
 
         lda     #$9f
         sta     RASTER_LINE
-        SET_INTERRUPT_EXECUTION(irq2)
+        SET_IRQ_VECTOR(irq2)
         jmp     ack
 
 irq2:
@@ -53,7 +53,7 @@ irq2:
 
         lda     #$c8
         sta     RASTER_LINE
-        SET_INTERRUPT_EXECUTION(irq3)
+        SET_IRQ_VECTOR(irq3)
         jmp     ack
 
 irq3:
@@ -64,7 +64,7 @@ irq3:
         
         lda     #00
         sta     RASTER_LINE
-        SET_INTERRUPT_EXECUTION(irq1)
+        SET_IRQ_VECTOR(irq1)
 
         jmp     ack
 

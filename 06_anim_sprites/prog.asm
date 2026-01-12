@@ -18,8 +18,8 @@ irqinit:
         lda     RASTER_SPRITE_INT_CTRL
         ora     #$01                            // Bit #0: 1 = Raster interrupt enabled.
         sta     RASTER_SPRITE_INT_CTRL
-        SET_RASTER_LINE_INTERRUPT($7f,$00)
-        SET_INTERRUPT_EXECUTION(irq1)
+        SET_RASTER_IRQ_LINE(0)
+        SET_IRQ_VECTOR(irq1)
 
         cli                                     // clear interrupt disable (re-enable interrupts)
         

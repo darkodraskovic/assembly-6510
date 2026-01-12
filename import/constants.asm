@@ -31,17 +31,20 @@
 .const TXT_COLOUR_2 = $D023
 .const  VIC_CONTR_REG = $D016
 .const COLOR_RAM = $D800 // 1/2 kB (1000 nibbles) of color memory
-//sprite colors registers
-.const	SPRITE_MULTICOLOR_1 = $D025
-.const	SPRITE_MULTICOLOR_2 = $D026
-.const	SPRITE_MULTICOLOR_3_0 = $D027
-.const	SPRITE_MULTICOLOR_3_1 = $D028
-.const	SPRITE_MULTICOLOR_3_2 = $D029
-.const	SPRITE_MULTICOLOR_3_3 = $D02A
-.const	SPRITE_MULTICOLOR_3_4 = $D02B
-.const	SPRITE_MULTICOLOR_3_5 = $D02C
-.const	SPRITE_MULTICOLOR_3_6 = $D02D
-.const	SPRITE_MULTICOLOR_3_7 = $D02E
+
+// sprite color registers (VIC-II)
+
+.const SPRITE_MULTICOLOR_1   = $D025   // shared multicolor #1 (used when sprite pixel bits = 01)
+.const SPRITE_MULTICOLOR_2   = $D026   // shared multicolor #2 (used when sprite pixel bits = 11)
+
+.const SPRITE_MULTICOLOR_3_0 = $D027   // sprite 0 individual color (used when bits = 10)
+.const SPRITE_MULTICOLOR_3_1 = $D028   // sprite 1 individual color
+.const SPRITE_MULTICOLOR_3_2 = $D029   // sprite 2 individual color
+.const SPRITE_MULTICOLOR_3_3 = $D02A   // sprite 3 individual color
+.const SPRITE_MULTICOLOR_3_4 = $D02B   // sprite 4 individual color
+.const SPRITE_MULTICOLOR_3_5 = $D02C   // sprite 5 individual color
+.const SPRITE_MULTICOLOR_3_6 = $D02D   // sprite 6 individual color
+.const SPRITE_MULTICOLOR_3_7 = $D02E   // sprite 7 individual color
 
 //sprite enable
 .const	SPRITE_ENABLE = $D015
